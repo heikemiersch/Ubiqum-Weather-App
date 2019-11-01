@@ -6,30 +6,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="stylo.css">
+    <link href="https://fonts.googleapis.com/css?family=Walter+Turncoat&display=swap" rel="stylesheet">
+
     <title>Weather App</title>
 </head>
 
 <body>
     <!-- search bar -->
     <div id="searchContainer">
-        <input class="SearchControl" type="text" placeholder="City or ZipCode" id="searchInput">
+        <input class="SearchControl" type="text" placeholder="City or Zip" id="searchInput">
         <button class="SearchControl" id="searchButton">Search</button>
     </div>
     <!-- weather container -->
     <div id="weatherContainer">
         <div id="weatherDescription">
-            <h1 id="cityHeader"></h1>
-            <div id="weatherMain">
-                <div id="temperature"></div>
-                <div id="weatherDescriptionHeader"></div>
-                <div><img id="documentIconImg"></div>
+            <h1 id="city"></h1>
+            <div id="weather">
+                <div id="weatherMajor">
+                    <div id="weatherDescriptionKeyword"></div>
+                    <div><img id="weatherIcon"></div>
+                    <div id="temperature"></div>
+                    <div id="humidity"></div>
+                </div>
+                <div id="weatherMinor">
+                    <div id="tempMin"></div>
+                    <div id="tempMax"></div>
+                </div>
             </div>
-            <div id="windSpeed" class="bottomDetails"></div>
-            <div id="humidity" class="bottomDetails"></div>
         </div>
     </div>
 
-    <script src="main.js"></script>
+    <script src="main.js">
+    </script>
 </body>
 
 </html>

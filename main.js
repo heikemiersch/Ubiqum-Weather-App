@@ -10,9 +10,11 @@ let searchMethod = "";
 // so it says that every single item in the searchTerm is a number
 
 function getSearchMethod(searchTerm) {
-    if (searchTerm.length === 5 && Number.parseInt(searchTerm) + "" === searchTerm)
-        searchMethod = "zip";
-    else searchMethod = "q";
+    // if (searchTerm.length === 5 && Number.parseInt(searchTerm) + "" === searchTerm)
+    //     searchMethod = "zip";
+    // else 
+
+    searchMethod = "q";
 }
 
 function searchWeather(searchTerm) {
@@ -27,8 +29,8 @@ function searchWeather(searchTerm) {
     })
 }
 
-function init(resultFromServer) {
-    switch (resultFromServer.weather[0].main) {
+function init(data) {
+    switch (data.weather[0].main) {
         case "Clear":
             document.body.style.backgroundImage = 'url("clear.jpg")';
             break;
@@ -39,6 +41,7 @@ function init(resultFromServer) {
             document.body.style.backgroundImage = 'url("mist.jpg")';
             break;
         case "Rain":
+        case "Drizzle":
             document.body.style.backgroundImage = 'url("rain.jpg")';
             break;
         case "Snow":
@@ -48,19 +51,29 @@ function init(resultFromServer) {
             document.body.style.backgroundImage = 'url("storm.jpg")';
             break;
         default:
-            document.body.style.backgroundImage = 'url("default.jpg")';
+            // document.body.style.backgroundImage = 'url("default.jpg")';
             break;
     }
+
     // so now grab elements by their id and put data in
-    let weatherDescriptionHeader = document.getElementById("weatherDescriptionHeader");
+    let weatherDescriptionKeyword = document.getElementById("weatherDescriptionKeyword");
     let temperatureElement = document.getElementById("temperature");
     let humidityElement = document.getElementById("humidity");
-    let windspeedElement = document.getElementById("windSpeed");
-    let cityHeader = document.getElementById("cityHeader");
-    let weatherIcon = document.getElementById("documentIconImg");
+    let city = document.getElementById("city");
+    let weatherIcon = document.getElementById("weatherIcon");
+    let tempMinElement = document.getElementById("tempMin");
+    let tempMaxElement = document.getElementById("tempMax");
 
-    weatherIcon.src = "http://openweathermap.org/img/wn/" + resultFromServer.weather[0].icon + ".png";
+    weatherIcon.src = "http://openweathermap.org/img/wn/" + data.weather[0].icon + ".png";
+    resultDescription = data.weather[0].description;
+    weatherDescriptionKeyword.innerText = resultDescription.toUpperCase();
+    temperatureElement.innerHTML = "temperature " + (Math.round(data.main.temp * 10) / 10) + " °C";
+    city.innerHTML = data.name + ", " + data.sys.country;
+    humidityElement.innerHTML = "humidity: " + data.main.humidity + " %";
+    tempMinElement.innerHTML = "min temperature: " + (Math.round(data.main.temp_min * 10) / 10) + " %";
+    tempMaxElement.innerHTML = "max temperature: " + (Math.round(data.main.temp_max * 10) / 10) + " %";
 
+    console.log(data);
 }
 
 // hook up the searchbutton
