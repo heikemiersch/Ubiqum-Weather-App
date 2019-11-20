@@ -1,3 +1,5 @@
+let appId = "4";
+
 let units = "metric";
 // what people type into searchfield
 let searchMethod = "";
